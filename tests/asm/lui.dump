@@ -1,0 +1,80 @@
+
+lui.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00002000 <_start>:
+    2000:	0040006f          	j	2004 <reset_vector>
+
+00002004 <reset_vector>:
+    2004:	51e05073          	csrwi	0x51e,0
+    2008:	00000193          	li	x3,0
+
+0000200c <test_2>:
+    200c:	000000b7          	lui	x1,0x0
+    2010:	00000393          	li	x7,0
+    2014:	00200193          	li	x3,2
+    2018:	04709a63          	bne	x1,x7,206c <fail>
+
+0000201c <test_3>:
+    201c:	fffff0b7          	lui	x1,0xfffff
+    2020:	4010d093          	srai	x1,x1,0x1
+    2024:	80000393          	li	x7,-2048
+    2028:	00300193          	li	x3,3
+    202c:	04709063          	bne	x1,x7,206c <fail>
+
+00002030 <test_4>:
+    2030:	7ffff0b7          	lui	x1,0x7ffff
+    2034:	4140d093          	srai	x1,x1,0x14
+    2038:	7ff00393          	li	x7,2047
+    203c:	00400193          	li	x3,4
+    2040:	02709663          	bne	x1,x7,206c <fail>
+
+00002044 <test_5>:
+    2044:	800000b7          	lui	x1,0x80000
+    2048:	4140d093          	srai	x1,x1,0x14
+    204c:	80000393          	li	x7,-2048
+    2050:	00500193          	li	x3,5
+    2054:	00709c63          	bne	x1,x7,206c <fail>
+
+00002058 <test_6>:
+    2058:	80000037          	lui	x0,0x80000
+    205c:	00000393          	li	x7,0
+    2060:	00600193          	li	x3,6
+    2064:	00701463          	bne	x0,x7,206c <fail>
+    2068:	00301a63          	bne	x0,x3,207c <pass>
+
+0000206c <fail>:
+    206c:	00119193          	slli	x3,x3,0x1
+    2070:	0011e193          	ori	x3,x3,1
+    2074:	51e19073          	csrw	0x51e,x3
+
+00002078 <f>:
+    2078:	0000006f          	j	2078 <f>
+
+0000207c <pass>:
+    207c:	00100193          	li	x3,1
+    2080:	51e19073          	csrw	0x51e,x3
+
+00002084 <p>:
+    2084:	0000006f          	j	2084 <p>
+    2088:	c0001073          	unimp
+	...
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1d41                	addi	x26,x26,-16
+   2:	0000                	unimp
+   4:	7200                	flw	f8,32(x12)
+   6:	7369                	lui	x6,0xffffa
+   8:	01007663          	bgeu	x0,x16,14 <_start-0x1fec>
+   c:	00000013          	nop
+  10:	7205                	lui	x4,0xfffe1
+  12:	3376                	fld	f6,376(x2)
+  14:	6932                	flw	f18,12(x2)
+  16:	7032                	flw	f0,44(x2)
+  18:	0030                	addi	x12,x2,8
+  1a:	0108                	addi	x10,x2,128
+  1c:	0b0a                	slli	x22,x22,0x2

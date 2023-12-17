@@ -1,0 +1,127 @@
+
+jalr.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00002000 <_start>:
+    2000:	0040006f          	j	2004 <reset_vector>
+
+00002004 <reset_vector>:
+    2004:	51e05073          	csrwi	0x51e,0
+    2008:	00000193          	li	x3,0
+
+0000200c <test_2>:
+    200c:	00200193          	li	x3,2
+    2010:	00000293          	li	x5,0
+    2014:	00000317          	auipc	x6,0x0
+    2018:	01030313          	addi	x6,x6,16 # 2024 <target_2>
+    201c:	000302e7          	jalr	x5,x6
+
+00002020 <linkaddr_2>:
+    2020:	0e00006f          	j	2100 <fail>
+
+00002024 <target_2>:
+    2024:	00000317          	auipc	x6,0x0
+    2028:	ffc30313          	addi	x6,x6,-4 # 2020 <linkaddr_2>
+    202c:	0c629a63          	bne	x5,x6,2100 <fail>
+
+00002030 <test_3>:
+    2030:	00300193          	li	x3,3
+    2034:	00000297          	auipc	x5,0x0
+    2038:	01028293          	addi	x5,x5,16 # 2044 <target_3>
+    203c:	000282e7          	jalr	x5,x5
+
+00002040 <linkaddr_3>:
+    2040:	0c00006f          	j	2100 <fail>
+
+00002044 <target_3>:
+    2044:	00000317          	auipc	x6,0x0
+    2048:	ffc30313          	addi	x6,x6,-4 # 2040 <linkaddr_3>
+    204c:	0a629a63          	bne	x5,x6,2100 <fail>
+
+00002050 <test_4>:
+    2050:	00400193          	li	x3,4
+    2054:	00000213          	li	x4,0
+    2058:	00000317          	auipc	x6,0x0
+    205c:	01030313          	addi	x6,x6,16 # 2068 <test_4+0x18>
+    2060:	000306e7          	jalr	x13,x6
+    2064:	08301e63          	bne	x0,x3,2100 <fail>
+    2068:	00120213          	addi	x4,x4,1 # 1 <_start-0x1fff>
+    206c:	00200293          	li	x5,2
+    2070:	fe5214e3          	bne	x4,x5,2058 <test_4+0x8>
+
+00002074 <test_5>:
+    2074:	00500193          	li	x3,5
+    2078:	00000213          	li	x4,0
+    207c:	00000317          	auipc	x6,0x0
+    2080:	01430313          	addi	x6,x6,20 # 2090 <test_5+0x1c>
+    2084:	00000013          	nop
+    2088:	000306e7          	jalr	x13,x6
+    208c:	06301a63          	bne	x0,x3,2100 <fail>
+    2090:	00120213          	addi	x4,x4,1 # 1 <_start-0x1fff>
+    2094:	00200293          	li	x5,2
+    2098:	fe5212e3          	bne	x4,x5,207c <test_5+0x8>
+
+0000209c <test_6>:
+    209c:	00600193          	li	x3,6
+    20a0:	00000213          	li	x4,0
+    20a4:	00000317          	auipc	x6,0x0
+    20a8:	01830313          	addi	x6,x6,24 # 20bc <test_6+0x20>
+    20ac:	00000013          	nop
+    20b0:	00000013          	nop
+    20b4:	000306e7          	jalr	x13,x6
+    20b8:	04301463          	bne	x0,x3,2100 <fail>
+    20bc:	00120213          	addi	x4,x4,1 # 1 <_start-0x1fff>
+    20c0:	00200293          	li	x5,2
+    20c4:	fe5210e3          	bne	x4,x5,20a4 <test_6+0x8>
+
+000020c8 <test_7>:
+    20c8:	00100293          	li	x5,1
+    20cc:	00000317          	auipc	x6,0x0
+    20d0:	01c30313          	addi	x6,x6,28 # 20e8 <test_7+0x20>
+    20d4:	ffc30067          	jr	-4(x6)
+    20d8:	00128293          	addi	x5,x5,1
+    20dc:	00128293          	addi	x5,x5,1
+    20e0:	00128293          	addi	x5,x5,1
+    20e4:	00128293          	addi	x5,x5,1
+    20e8:	00128293          	addi	x5,x5,1
+    20ec:	00128293          	addi	x5,x5,1
+    20f0:	00400393          	li	x7,4
+    20f4:	00700193          	li	x3,7
+    20f8:	00729463          	bne	x5,x7,2100 <fail>
+    20fc:	00301a63          	bne	x0,x3,2110 <pass>
+
+00002100 <fail>:
+    2100:	00119193          	slli	x3,x3,0x1
+    2104:	0011e193          	ori	x3,x3,1
+    2108:	51e19073          	csrw	0x51e,x3
+
+0000210c <f>:
+    210c:	0000006f          	j	210c <f>
+
+00002110 <pass>:
+    2110:	00100193          	li	x3,1
+    2114:	51e19073          	csrw	0x51e,x3
+
+00002118 <p>:
+    2118:	0000006f          	j	2118 <p>
+    211c:	c0001073          	unimp
+	...
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1d41                	addi	x26,x26,-16
+   2:	0000                	unimp
+   4:	7200                	flw	f8,32(x12)
+   6:	7369                	lui	x6,0xffffa
+   8:	01007663          	bgeu	x0,x16,14 <_start-0x1fec>
+   c:	00000013          	nop
+  10:	7205                	lui	x4,0xfffe1
+  12:	3376                	fld	f6,376(x2)
+  14:	6932                	flw	f18,12(x2)
+  16:	7032                	flw	f0,44(x2)
+  18:	0030                	addi	x12,x2,8
+  1a:	0108                	addi	x10,x2,128
+  1c:	0b0a                	slli	x22,x22,0x2

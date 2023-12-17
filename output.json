@@ -1,0 +1,22 @@
+{
+    "vlsi.builtins.is_complete": false,
+    "par.outputs.output_ilms": [],
+    "par.outputs.output_ilms_meta": "append",
+    "vlsi.inputs.ilms": [],
+    "vlsi.inputs.ilms_meta": "append",
+    "par.outputs.output_gds": "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/riscv_top.gds",
+    "par.outputs.output_netlist": "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/riscv_top.lvs.v",
+    "par.outputs.output_sim_netlist": "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/riscv_top.sim.v",
+    "par.outputs.hcells_list": [],
+    "par.outputs.seq_cells": "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/find_regs_cells.json",
+    "par.outputs.all_regs": "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/find_regs_paths.json",
+    "par.inputs.input_files": [
+        "/home/tmp/eecs151-aaq/asic_project_fa23/build/syn-rundir/riscv_top.mapped.v"
+    ],
+    "par.inputs.top_module": "riscv_top",
+    "par.outputs.sdf_file": "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/riscv_top.par.sdf",
+    "par.outputs.spefs": [
+        "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/riscv_top.ss_100C_1v60.par.spef",
+        "/home/tmp/eecs151-aaq/asic_project_fa23/build/par-rundir/riscv_top.ff_n40C_1v95.par.spef"
+    ]
+}

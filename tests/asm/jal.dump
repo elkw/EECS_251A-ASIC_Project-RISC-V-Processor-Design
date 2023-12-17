@@ -1,0 +1,76 @@
+
+jal.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00002000 <_start>:
+    2000:	0040006f          	j	2004 <reset_vector>
+
+00002004 <reset_vector>:
+    2004:	51e05073          	csrwi	0x51e,0
+    2008:	00000193          	li	x3,0
+
+0000200c <test_2>:
+    200c:	00200193          	li	x3,2
+    2010:	00000093          	li	x1,0
+    2014:	0100026f          	jal	x4,2024 <target_2>
+
+00002018 <linkaddr_2>:
+    2018:	00000013          	nop
+    201c:	00000013          	nop
+    2020:	0400006f          	j	2060 <fail>
+
+00002024 <target_2>:
+    2024:	00000117          	auipc	x2,0x0
+    2028:	ff410113          	addi	x2,x2,-12 # 2018 <linkaddr_2>
+    202c:	02411a63          	bne	x2,x4,2060 <fail>
+
+00002030 <test_3>:
+    2030:	00100093          	li	x1,1
+    2034:	0140006f          	j	2048 <test_3+0x18>
+    2038:	00108093          	addi	x1,x1,1
+    203c:	00108093          	addi	x1,x1,1
+    2040:	00108093          	addi	x1,x1,1
+    2044:	00108093          	addi	x1,x1,1
+    2048:	00108093          	addi	x1,x1,1
+    204c:	00108093          	addi	x1,x1,1
+    2050:	00300393          	li	x7,3
+    2054:	00300193          	li	x3,3
+    2058:	00709463          	bne	x1,x7,2060 <fail>
+    205c:	00301a63          	bne	x0,x3,2070 <pass>
+
+00002060 <fail>:
+    2060:	00119193          	slli	x3,x3,0x1
+    2064:	0011e193          	ori	x3,x3,1
+    2068:	51e19073          	csrw	0x51e,x3
+
+0000206c <f>:
+    206c:	0000006f          	j	206c <f>
+
+00002070 <pass>:
+    2070:	00100193          	li	x3,1
+    2074:	51e19073          	csrw	0x51e,x3
+
+00002078 <p>:
+    2078:	0000006f          	j	2078 <p>
+    207c:	c0001073          	unimp
+    2080:	0000                	unimp
+	...
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1d41                	addi	x26,x26,-16
+   2:	0000                	unimp
+   4:	7200                	flw	f8,32(x12)
+   6:	7369                	lui	x6,0xffffa
+   8:	01007663          	bgeu	x0,x16,14 <_start-0x1fec>
+   c:	00000013          	nop
+  10:	7205                	lui	x4,0xfffe1
+  12:	3376                	fld	f6,376(x2)
+  14:	6932                	flw	f18,12(x2)
+  16:	7032                	flw	f0,44(x2)
+  18:	0030                	addi	x12,x2,8
+  1a:	0108                	addi	x10,x2,128
+  1c:	0b0a                	slli	x22,x22,0x2

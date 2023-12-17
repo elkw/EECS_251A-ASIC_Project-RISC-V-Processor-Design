@@ -1,0 +1,113 @@
+
+fence_i.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00002000 <_start>:
+    2000:	0040006f          	j	2004 <reset_vector>
+
+00002004 <reset_vector>:
+    2004:	51e05073          	csrwi	0x51e,0
+    2008:	00000193          	li	x3,0
+    200c:	06f00693          	li	x13,111
+    2010:	00001517          	auipc	x10,0x1
+    2014:	ff051503          	lh	x10,-16(x10) # 3000 <begin_signature>
+    2018:	00001597          	auipc	x11,0x1
+    201c:	fea59583          	lh	x11,-22(x11) # 3002 <begin_signature+0x2>
+    2020:	00000013          	nop
+    2024:	00000013          	nop
+    2028:	00000013          	nop
+    202c:	00000013          	nop
+    2030:	00000013          	nop
+    2034:	00000013          	nop
+    2038:	00000013          	nop
+    203c:	00000013          	nop
+    2040:	00001297          	auipc	x5,0x1
+    2044:	fca29223          	sh	x10,-60(x5) # 3004 <begin_signature+0x4>
+    2048:	00001297          	auipc	x5,0x1
+    204c:	fab29f23          	sh	x11,-66(x5) # 3006 <begin_signature+0x6>
+    2050:	0000100f          	fence.i
+    2054:	00001797          	auipc	x15,0x1
+    2058:	fb078793          	addi	x15,x15,-80 # 3004 <begin_signature+0x4>
+    205c:	00078867          	jalr	x16,x15
+
+00002060 <test_2>:
+    2060:	00000013          	nop
+    2064:	1bc00393          	li	x7,444
+    2068:	00200193          	li	x3,2
+    206c:	06769a63          	bne	x13,x7,20e0 <fail>
+    2070:	06400713          	li	x14,100
+    2074:	fff70713          	addi	x14,x14,-1
+    2078:	fe071ee3          	bnez	x14,2074 <test_2+0x14>
+    207c:	00001297          	auipc	x5,0x1
+    2080:	f8a29823          	sh	x10,-112(x5) # 300c <begin_signature+0xc>
+    2084:	00001297          	auipc	x5,0x1
+    2088:	f8b29523          	sh	x11,-118(x5) # 300e <begin_signature+0xe>
+    208c:	0000100f          	fence.i
+    2090:	00000013          	nop
+    2094:	00000013          	nop
+    2098:	00000013          	nop
+    209c:	00000013          	nop
+    20a0:	00000013          	nop
+    20a4:	00000013          	nop
+    20a8:	00000013          	nop
+    20ac:	00000013          	nop
+    20b0:	00000013          	nop
+    20b4:	00000013          	nop
+    20b8:	00000013          	nop
+    20bc:	00000013          	nop
+    20c0:	00001797          	auipc	x15,0x1
+    20c4:	f4c78793          	addi	x15,x15,-180 # 300c <begin_signature+0xc>
+    20c8:	00078867          	jalr	x16,x15
+
+000020cc <test_3>:
+    20cc:	00000013          	nop
+    20d0:	30900393          	li	x7,777
+    20d4:	00300193          	li	x3,3
+    20d8:	00769463          	bne	x13,x7,20e0 <fail>
+    20dc:	00301a63          	bne	x0,x3,20f0 <pass>
+
+000020e0 <fail>:
+    20e0:	00119193          	slli	x3,x3,0x1
+    20e4:	0011e193          	ori	x3,x3,1
+    20e8:	51e19073          	csrw	0x51e,x3
+
+000020ec <f>:
+    20ec:	0000006f          	j	20ec <f>
+
+000020f0 <pass>:
+    20f0:	00100193          	li	x3,1
+    20f4:	51e19073          	csrw	0x51e,x3
+
+000020f8 <p>:
+    20f8:	0000006f          	j	20f8 <p>
+    20fc:	c0001073          	unimp
+	...
+
+Disassembly of section .data:
+
+00003000 <begin_signature>:
+    3000:	14d68693          	addi	x13,x13,333
+    3004:	0de68693          	addi	x13,x13,222
+    3008:	000807e7          	jalr	x15,x16
+    300c:	22b68693          	addi	x13,x13,555
+    3010:	000807e7          	jalr	x15,x16
+	...
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1d41                	addi	x26,x26,-16
+   2:	0000                	unimp
+   4:	7200                	flw	f8,32(x12)
+   6:	7369                	lui	x6,0xffffa
+   8:	01007663          	bgeu	x0,x16,14 <_start-0x1fec>
+   c:	00000013          	nop
+  10:	7205                	lui	x4,0xfffe1
+  12:	3376                	fld	f6,376(x2)
+  14:	6932                	flw	f18,12(x2)
+  16:	7032                	flw	f0,44(x2)
+  18:	0030                	addi	x12,x2,8
+  1a:	0108                	addi	x10,x2,128
+  1c:	0b0a                	slli	x22,x22,0x2
